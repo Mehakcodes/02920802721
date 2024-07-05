@@ -1,4 +1,4 @@
-const access_token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzIwMTY0MzczLCJpYXQiOjE3MjAxNjQwNzMsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjZmNjZhZjA2LTA5MzEtNDI4YS1hNTAxLWI3NjgwMDU5NDM1OCIsInN1YiI6Im1laGFrcmpwbDgwQGdtYWlsLmNvbSJ9LCJjb21wYW55TmFtZSI6IkJoYWd3YW4gUGFyc2h1cmFtIEluc3RpdHV0ZSBvZiBUZWNobm9sb2d5IiwiY2xpZW50SUQiOiI2ZjY2YWYwNi0wOTMxLTQyOGEtYTUwMS1iNzY4MDA1OTQzNTgiLCJjbGllbnRTZWNyZXQiOiJRSGJFWHhOcXBoa0FKU2ZaIiwib3duZXJOYW1lIjoiTWVoYWsgUmFqcGFsIiwib3duZXJFbWFpbCI6Im1laGFrcmpwbDgwQGdtYWlsLmNvbSIsInJvbGxObyI6IjAyOTIwODAyNzIxIn0.kUZzvEHniHJ6HPJknRcQUsDlsQcBNyIURBNxxVtgJ0g";
+const access_token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiZXhwIjoxNzIwMTY1MjEzLCJpYXQiOjE3MjAxNjQ5MTMsImlzcyI6IkFmZm9yZG1lZCIsImp0aSI6IjZmNjZhZjA2LTA5MzEtNDI4YS1hNTAxLWI3NjgwMDU5NDM1OCIsInN1YiI6Im1laGFrcmpwbDgwQGdtYWlsLmNvbSJ9LCJjb21wYW55TmFtZSI6IkJoYWd3YW4gUGFyc2h1cmFtIEluc3RpdHV0ZSBvZiBUZWNobm9sb2d5IiwiY2xpZW50SUQiOiI2ZjY2YWYwNi0wOTMxLTQyOGEtYTUwMS1iNzY4MDA1OTQzNTgiLCJjbGllbnRTZWNyZXQiOiJRSGJFWHhOcXBoa0FKU2ZaIiwib3duZXJOYW1lIjoiTWVoYWsgUmFqcGFsIiwib3duZXJFbWFpbCI6Im1laGFrcmpwbDgwQGdtYWlsLmNvbSIsInJvbGxObyI6IjAyOTIwODAyNzIxIn0.9aufv-H2MNUuZd89JTgzVJTLy2DTeq-YfjmO492-FbY";
 const express = require('express');
 const axios = require('axios');
 const app = express();
@@ -90,15 +90,6 @@ app.get('/categories/:categoryname/products', async (req, res) => {
 app.get('/categories/:categoryname/products/:productid', async (req, res) => {
   try {
     const { categoryname, productid } = req.params;
-    const { minPrice = 0, maxPrice = Infinity, top = 10 } = req.query;
-
-    // Check if the category, minPrice, and maxPrice match the cache
-    if (categoryname !== cachedCategory || minPrice !== cachedMinPrice || maxPrice !== cachedMaxPrice) {
-      cachedProducts = await fetchProducts(categoryname, minPrice, maxPrice, top);
-      cachedCategory = categoryname;
-      cachedMinPrice = minPrice;
-      cachedMaxPrice = maxPrice;
-    }
 
     const product = cachedProducts.find(p => generateUniqueId(p,cachedProducts.indexOf(p)));
 
