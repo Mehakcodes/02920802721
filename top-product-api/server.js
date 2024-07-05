@@ -58,6 +58,7 @@ app.get('/categories/:categoryname/products', async (req, res) => {
         return b[sort] - a[sort];
       }
     });
+    cachedProducts = cachedProducts.slice(0, n);
 
     // Pagination logic if n > 10
     if (n > 10) {
